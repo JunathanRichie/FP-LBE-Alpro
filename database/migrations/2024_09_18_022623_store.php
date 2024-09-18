@@ -14,23 +14,24 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->integer('id_user')->primary();
             $table->string('nama_user', 50);
-            $table->string('email', 75);
-            $table->string('no_telp', 14);
+            $table->string('email', 75)->unique();
+            $table->string('no_telp', 14)->nullable();
         });
 
         Schema::create('items', function (Blueprint $table) {
-            $table->char('id_item', 14)->primary();
+            $table->char('id_item', 15)->primary();
             $table->string('nama_item', 100);
             $table->integer('stock_item');
             $table->float('harga_item', 8, 2);
+            $table->string('image', 100);
         });
 
         Schema::create('promo_items', function (Blueprint $table) {
             $table->integer('id_promo')->primary();
             $table->boolean('aktif');
             $table->integer('mn_beli');
-            $table->integer('diskon');
-            $table->integer('gratis_item');
+            $table->integer('diskon')->nullable();
+            $table->integer('gratis_item')->nullable();
         });
 
         Schema::create('transactions', function (Blueprint $table) {
