@@ -28,7 +28,6 @@ class PromoItemSeeder extends Seeder
                 'aktif' => true,
                 'mn_beli' => 2,
                 'diskon' => 25590,
-                'gratis_item' => 1,
                 'id_item' => '8 123456 789022'
             ],
             [

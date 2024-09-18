@@ -26,7 +26,7 @@ return new class extends Migration
         });
 
         Schema::create('items', function (Blueprint $table) {
-            $table->char('id_item', 15)->primary();
+            $table->char('id_item', 16)->primary();
             $table->string('nama_item', 100);
             $table->integer('stock_item');
             $table->float('harga_item', 8, 2);
@@ -53,7 +53,7 @@ return new class extends Migration
             $table->integer('id_user');
             $table->foreign('id_user')->references('id_user')->on('users');
             
-            $table->char('id_item', 14);
+            $table->char('id_item', 16);
             $table->foreign('id_item')->references('id_item')->on('items');
         });
 
@@ -73,10 +73,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        schema::dropIfExists('items_transactions');
         Schema::dropIfExists('transactions');
         Schema::dropIfExists('promo_items');
         Schema::dropIfExists('items');
         Schema::dropIfExists('users');
-        // schema::dropIfExists('items_transactions');
     }
 };

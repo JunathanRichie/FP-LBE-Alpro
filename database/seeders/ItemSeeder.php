@@ -79,7 +79,7 @@ class ItemSeeder extends Seeder
                 // promo beli 2 lebih hemat jadi 14.990
             ],
             [
-                'id_item' => '8 123456 7890 21',
+                'id_item' => '8 123456 789021',
                 'nama_item' => 'So Klin Softergent Bubuk Bag 1,5kg',
                 'stock_item' => 100,
                 'harga_item' => 38490,
