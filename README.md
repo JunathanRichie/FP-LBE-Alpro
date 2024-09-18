@@ -11,9 +11,12 @@ gak usah di-init lagi, ntar kalo mau jalanin webnya, pake:
 <br>
 npm run dev
 
-tanya ke gerry di .env line 26 27, login info database apa
+.env line 26 ama 27 itu sesuaiin ama local mysql kalian
 + jan lupa 
++ `composer install`, klo gk bekerja => `composer update`
++ `php artisan key:generate`
++ `php artisan session:table`
 + `php artisan make:migrate`
-+ `php artisan migrate:fresh --seed
++ `php artisan migrate:fresh --seed`
 
 klo mo bikin login, itu pake [NRP].@gmail.com sebagai data info
