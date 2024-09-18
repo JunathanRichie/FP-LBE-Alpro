@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->integer('id_user')->primary();
-            $table->string('nama_user', 50);
             $table->string('email', 75)->unique();
+            $table->string('nama_user', 50);
+            $table->string('password', 255);
             $table->string('no_telp', 14)->nullable();
         });
 
@@ -38,7 +39,8 @@ return new class extends Migration
             $table->integer('id_transaction')->primary();
             $table->float('total_harga', 8, 2);
             $table->dateTime('tgl_transaksi');
-    
+            $table->boolean('paid');
+
             $table->integer('id_user');
             $table->foreign('id_user')->references('id_user')->on('users');
             
@@ -56,5 +58,6 @@ return new class extends Migration
         Schema::dropIfExists('promo_items');
         Schema::dropIfExists('items');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('keranjang');
     }
 };
