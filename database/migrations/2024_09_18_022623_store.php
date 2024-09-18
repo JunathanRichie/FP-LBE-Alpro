@@ -40,7 +40,7 @@ return new class extends Migration
             $table->integer('diskon')->nullable();
             $table->integer('gratis_item')->nullable();
 
-            $table->char('id_item', 15);
+            $table->char('id_item', 16);
             $table->foreign('id_item')->references('id_item')->on('items');
         });
 
@@ -61,7 +61,7 @@ return new class extends Migration
             $table->integer('id_transaction');
             $table->foreign('id_transaction')->references('id_transaction')->on('transactions');
             
-            $table->char('id_item', 15);
+            $table->char('id_item', 16);
             $table->foreign('id_item')->references('id_item')->on('items');
 
             $table->integer('kuantitas');
