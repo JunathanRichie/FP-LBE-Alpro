@@ -283,57 +283,11 @@
                 <h1 class="text-center">Copyright @Galaksi Bimasakti, Penakluk Dunia dan Bintang, Penjajah Semesta, dan Perwira Lubang Hitam Mahasakti</h1>
             </div>
         </section>
-        <div class="fixed bottom-10 right-10 w-14 h-14 flex justify-center items-center rounded-full dark:bg-white bg-gray-800 dark:text-black text-white hover:bg-blue-800 dark:hover:bg-blue-900 dark:hover:text-white transition-all duration-300 ease-in-out">
-            <x-ionicon-cart-outline class="w-8 h-8" />
-        </div>
-<<<<<<< HEAD
-=======
-        <section id="about" class="min-h-screen flex items-center justify-center">
-            <div class="text-center">
-                <h1 class="text-4xl font-bold text-black dark:text-white mb-4">
-                    LBE Alpro Kelompok 7
-                </h1>
-                <p class="text-lg text-gray-700 dark:text-gray-300">
-                    An E-commerce Website.
-                </p>
-                <div class="grid grid-cols-4 gap-10 mx-auto w-full">
-                    <!-- Member 1 -->
-                    <div class="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4">
-                        <div class="w-32 h-32 bg-gray-200 rounded-full overflow-hidden">
-                            <img src="path-to-image.jpg" alt="Member 1" class="w-full h-full object-cover">
-                        </div>
-                        <div class="mt-4 text-lg font-semibold text-gray-800 dark:text-white">Vinsario Shentana</div>
-                    </div>
-                    
-                    <!-- Member 2 -->
-                    <div class="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4">
-                        <div class="w-32 h-32 bg-gray-200 rounded-full overflow-hidden">
-                            <img src="path-to-image.jpg" alt="Member 2" class="w-full h-full object-cover">
-                        </div>
-                        <div class="mt-4 text-lg font-semibold text-gray-800 dark:text-white">Junathan Richie</div>
-                    </div>
-                    
-                    <!-- Member 3 -->
-                    <div class="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4">
-                        <div class="w-32 h-32 bg-gray-200 rounded-full overflow-hidden">
-                            <img src="path-to-image.jpg" alt="Member 3" class="w-full h-full object-cover">
-                        </div>
-                        <div class="mt-4 text-lg font-semibold text-gray-800 dark:text-white">Gerry Nicholas </div>
-                    </div>
-
-                    <!-- Member 4 -->
-                    <div class="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4">
-                        <div class="w-32 h-32 bg-gray-200 rounded-full overflow-hidden">
-                            <img src="path-to-image.jpg" alt="Member 4" class="w-full h-full object-cover">
-                        </div>
-                        <div class="mt-4 text-lg font-semibold text-gray-800 dark:text-white">Mathias Adya</div>
-                    </div>
-                </div>
+        <a href="{{ route('cart.index') }}">
+            <div class="fixed bottom-10 right-10 w-14 h-14 flex justify-center items-center rounded-full dark:bg-white bg-gray-800 dark:text-black text-white hover:bg-blue-800 dark:hover:bg-blue-900 dark:hover:text-white transition-all duration-300 ease-in-out">
+                <x-ionicon-cart-outline class="w-8 h-8" />
             </div>
-        </section>
-        <div class="h-screen"></div>
-        <div class="h-screen"></div>
->>>>>>> d6a28c9a2f1a7419653ac50f6cb80f79f0798463
+        </a>
         <script>
             var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
             var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
