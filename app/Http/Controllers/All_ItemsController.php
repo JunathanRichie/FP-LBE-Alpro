@@ -11,6 +11,7 @@ class All_ItemsController extends Controller
     {
         $items = Item::all();
         
+        // return response()->json($items['image']);
         return view('all-items', compact('items'));
     }
 }
