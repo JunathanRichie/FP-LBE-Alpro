@@ -1,5 +1,5 @@
 <div class="relative flex flex-col gap-1 p-4 h-72 dark:border-gray-400 border-gray-300 border rounded-lg shadow-md shadow-gray-600 dark:shadow-teal-100">
-    <img src="{{ asset('images/laptop.jpg') }}" alt="Product Image" class="w-full object-cover">
+    <img src="{{ asset('images/') . $image}}" alt="Product Image" class="w-full object-cover">
     <h2 class="text-base dark:text-white text-black">{{ $name }}</h2>
     <h2 class="text-sm dark:text-white text-black font-semibold">Rp {{ $price }}</h2>
     <form class="w-28">
@@ -22,15 +22,6 @@
 </div>
 
 <script>
-    // function showAlert(name, price) {
-    //     // alert('Name: ' + name + '\nPrice: Rp ' + price);
-    //     Swal.fire({
-    //         title: "Successfully added to Cart!",
-    //         html: name  + '<br>' + price,
-    //         icon: "success"
-    //     });
-    // }
-
     function showAlert(name, price) {
         Swal.fire({
             title: "Successfully added to Cart!",
@@ -39,12 +30,11 @@
             showCancelButton: true,
             confirmButtonText: 'Go to Cart',
             cancelButtonText: 'Close',
-            confirmButtonColor: '#3085d6', // Customize color for the confirm button
-            cancelButtonColor: '#d33', // Customize color for the cancel button
-            reverseButtons: true, // Reverse the order of buttons
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            reverseButtons: true, 
         }).then((result) => {
             if (result.isConfirmed) {
-                // Navigate to the cart page
                 window.location.href = "{{ route('cart.index') }}";
             }
         });

@@ -12,6 +12,7 @@ class Item extends Model
     protected $keyType = 'char';
 
     protected $fillable = [
+        'id_item',
         'nama_item',
         'stock_item',
         'harga_item',
