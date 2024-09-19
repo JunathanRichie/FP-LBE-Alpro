@@ -32,6 +32,7 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="nunito-sans antialiased dark:bg-gray-900 bg-white transition-colors duration-200 ease-in-out">
     <!-- Navigation -->

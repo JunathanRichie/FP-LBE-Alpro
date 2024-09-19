@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\All_ItemsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
@@ -11,8 +12,8 @@ Route::get('/', function () {
 });
 
 // Untuk API
-Route::get('/items', [ItemController::class, 'index']);
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/all-items', [All_ItemsController::class, 'index'])->name('all-items.index');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
 Route::delete('/transactions/{transaction}/items/{item}', [TransactionController::class, 'deleteItemTransaction']);
 
