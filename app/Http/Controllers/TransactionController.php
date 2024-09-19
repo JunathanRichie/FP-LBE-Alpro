@@ -38,4 +38,18 @@ class TransactionController extends Controller
 
         return response()->json($transaction, 200);
     }
+
+    public function deleteItemTransaction(Request $request, $transactionId, $itemId)
+    {
+        $transaction = Transaction::findOrFail($transactionId);
+        $itemTransaction = $transaction->itemTransactions()->where('item_id', $itemId)->first();
+
+        if ($itemTransaction) {
+            $itemTransaction->delete();
+            $transaction->calculateTotal();
+            return response()->json(['message' => 'Item transaction deleted successfully', 'transaction' => $transaction], 200);
+        } else {
+            return response()->json(['message' => 'Item transaction not found'], 404);
+        }
+    }
 }
