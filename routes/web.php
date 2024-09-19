@@ -25,7 +25,8 @@ Route::post('/logout', function () {
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/all-items', [All_ItemsController::class, 'index'])->name('all-items.index');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
-Route::delete('/transactions/{transaction}/items/{item}', [TransactionController::class, 'deleteItemTransaction']);
+Route::delete('/cart/{transaction_id}/items/{item_id}', [CartController::class, 'removeItem']);
+Route::delete('/cart/remove', [CartController::class, 'removeCart']);
 
 Route::put('/transactions/{transaction}/items/{item}', [TransactionController::class, 'updateItem']);
 Route::get('/get-csrf-token', function () {

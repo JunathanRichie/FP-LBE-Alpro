@@ -75,4 +75,74 @@ class CartController extends Controller
     {
         return view('cart');
     }
+
+    public function removeItem($transaction_id, $item_id)
+    {
+        try {
+            // Try to find the entry in the item_transaction table
+            $itemTransaction = DB::table('item_transaction')
+                ->where('transaction_id', $transaction_id)
+                ->where('item_id', $item_id)
+                ->first();
+
+            // If the entry does not exist, return a 404 response
+            if (!$itemTransaction) {
+                return response()->json([
+                    'error' => 'Item or transaction not found.'
+                ], 404);
+            }
+
+            // Delete the item transaction entry
+            DB::table('item_transaction')
+                ->where('transaction_id', $transaction_id)
+                ->where('item_id', $item_id)
+                ->delete();
+
+            // Return a success response
+            return response()->json([
+                'message' => 'Item successfully removed from the cart.'
+            ], 200);
+        } catch (Exception $e) {
+            // Catch any exceptions and return an error message with details
+            return response()->json([
+                'error' => 'An error occurred while deleting the item.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function removeCart(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'transaction_id' => 'required|integer',
+                'item_id' => 'required|string'
+            ]);
+            $entry = DB::table('item_transaction')
+                ->where('transaction_id', $validated['transaction_id'])
+                ->where('item_id', $validated['item_id'])
+                ->first();
+
+            if (!$entry) {
+                return response()->json([
+                    'error' => 'Item or transaction not found.'
+                ], 404);
+            }
+            if ($entry) {
+                DB::table('item_transaction')
+                    ->where('transaction_id', $validated['transaction_id'])
+                    ->where('item_id', $validated['item_id'])
+                    ->delete();
+                return response()->json([
+                    'message' => 'Item successfully removed from the cart.'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            // Catch any exceptions and return an error message with details
+            return response()->json([
+                'error' => 'An error occurred while deleting the cart.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

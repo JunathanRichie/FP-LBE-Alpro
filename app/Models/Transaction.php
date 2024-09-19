@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ItemsTransaction;
-use App\Models\User;
 
 class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['total_harga', 'tgl_transaksi', 'id_user','paid'];
+    protected $fillable = ['total_harga', 'tgl_transaksi', 'user_id','paid'];
 
-    public function itemsTransactions()
+    public function itemTransactions()
     {
-        return $this->hasMany(ItemsTransaction::class);
+        return $this->hasMany(ItemTransaction::class);
     }
 
     public function user()
@@ -23,12 +21,12 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function calculateTotal() {
-    //     $total = 0;
-    //     foreach ($this->itemTransactions as $itemTransaction) {
-    //         $total += $itemTransaction->harga_kumulatif;
-    //     }
-    //     $this->total_harga = $total;
-    //     $this->save();
-    // }
+    public function calculateTotal() {
+        $total = 0;
+        foreach ($this->itemTransactions as $itemTransaction) {
+            $total += $itemTransaction->harga_kumulatif;
+        }
+        $this->total_harga = $total;
+        $this->save();
+    }
 }
