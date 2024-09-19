@@ -6,8 +6,8 @@
         </div>
         <div class="w-full flex justify-center gap-8">
             <a href="/" class="dark:text-white text-black">Home</a>
-            <a href="/" class="dark:text-white text-black">New Arrivals</a>
-            <a href="/" class="dark:text-white text-black">All Products</a>
+            <a href="/#" class="dark:text-white text-black">New Arrivals</a>
+            <a href="/all-items" class="dark:text-white text-black">All Products</a>
             <a href="/#about" class="dark:text-white text-black">About Us</a>
             <a href="/#contact" class="dark:text-white text-black">Contact Us</a>
             <button id="theme-toggle" type="button" class="w-7 h-7 flex items-center justify-center text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1">
