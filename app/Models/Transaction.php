@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'id_transaction';
     protected $fillable = ['total_harga', 'tgl_transaksi', 'user_id','paid'];
 
     public function itemTransactions()

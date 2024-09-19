@@ -39,7 +39,6 @@ class CartController extends Controller
             $itemsTransaction = ItemsTransaction::where('id_transaction', $id_transaction_input)
             ->where('id_item', $validated['id_item'])
             ->first();
-            // echo $itemsTransaction->kuantitas;
             if ($itemsTransaction) {
                 // Update kuantitas jika item sudah ada di cart
                 $itemsTransaction->kuantitas += $validated['kuantitas'];
@@ -66,6 +65,27 @@ class CartController extends Controller
                 'transaction' => $itemsTransaction,
                 'total_harga' => $totalHarga
             ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getCart(Request $request, $userId)
+    {
+        try {
+            $transactions = Transaction::where('id_user', $userId)
+            ->where('paid', 0)
+            ->first(); // Ambil hanya 1
+            if (!$transactions) {
+                return response()->json(['message' => 'No unpaid transactions found for this user.']);
+            }
+            $itemsTransactions = ItemsTransaction::where('id_transaction', $transactions->id_transaction)->get();
+            if ($itemsTransactions->isEmpty()) {
+                return response()->json(['message' => 'No transactions found for this ID.']);
+            }
+    
+            return response()->json(['data' => $itemsTransactions], 200);
+            
         } catch (\Exception $e) {
             return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
         }

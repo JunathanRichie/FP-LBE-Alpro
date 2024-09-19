@@ -36,3 +36,5 @@ Route::get('/get-csrf-token', function () {
 });
 
 Route::post('/cart/add', [CartController::class, 'addToCart']);
+
+Route::get('/cart/{userId}', [CartController::class, 'getCart']);
