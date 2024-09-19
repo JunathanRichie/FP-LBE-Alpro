@@ -10,7 +10,24 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="{{ asset('css/output.css') }}" rel="stylesheet">
-        <link rel="icon" href="{{ asset('images/logo-dark.png') }}" sizes="1000x1000">
+        <link rel="icon" href="{{ asset('images/logo-dark.png') }}" sizes="500x500">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+        <style>
+            .nunito-sans {
+                font-family: "Nunito Sans", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: <weight>;
+                font-style: normal;
+                font-variation-settings:
+                    "wdth" 100,
+                    "YTLC" 500;
+                }
+            .left-42{
+                left: 168px;
+            }
+        </style>
         <script>
             if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
@@ -19,8 +36,8 @@
             }
         </script>
     </head>
-    <body class="font-sans antialiased dark:bg-black bg-white">
-        <nav class="fixed w-full dark:border-b-white border-b-black border-b-2 h-40">
+    <body class="nunito-sans antialiased dark:bg-black bg-white">
+        <nav class="fixed w-full dark:bg-black bg-white dark:border-b-white border-b-black border-b-2 h-40 z-50">
             <div class="w-full flex flex-col items-center p-4">
                 <div>
                     <img src="{{ asset('images/logo1-dark.png') }}" alt="Logo" class="w-24 h-24 hidden dark:block">
@@ -43,7 +60,15 @@
             </div>
         </nav>
         <!-- Main Content -->
-        <div></div>
+        <div class="pt-48"></div>
+        <div class="grid grid-cols-5 w-2/3 mx-auto">
+            <div class="flex flex-col gap-1 p-4 h-64 dark:border-gray-400 border-gray-300 border rounded-lg shadow-md shadow-gray-600 dark:shadow-teal-100">
+                <img src="{{ asset('images/laptop.jpg') }}" alt="Laptop" class="w-full object-cover">
+                <h2 class="text-sm dark:text-white text-black">Laptop Gedagedi 5 AMD Ryzen 7</h2>
+                <h2 class="text-sm dark:text-white text-black font-semibold">Rp 15.000.000</h2>
+                <button class="w-12 h-12 rounded-full relative bg-white top-9 left-38"></button>
+            </div>
+        </div>
         <div class="h-screen"></div>
         <div class="h-screen"></div>
         <script>
