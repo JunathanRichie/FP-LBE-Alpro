@@ -7,11 +7,11 @@
     <section id="new-arrivals">
         <h1 class="text-4xl font-bold text-black dark:text-white text-center mb-8">New Arrivals</h1>
         <div class="grid grid-cols-5 w-3/4 mx-auto gap-10">
-            <x-card name="Laptop Gedagedi 5 AMD Ryzen 7" price="15.000.000" />
-            <x-card name="Laptop Gedagedi 5 AMD Ryzen 7" price="15.000.000" />
-            <x-card name="Laptop Gedagedi 5 AMD Ryzen 7" price="15.000.000" />
-            <x-card name="Laptop Gedagedi 5 AMD Ryzen 7" price="15.000.000" />
-            <x-card name="Laptop Gedagedi 5 AMD Ryzen 7" price="15.000.000" />
+            @forelse ($items as $item)
+                <x-card name="{{ $item->nama_item }}" price="{{ $item->harga_item }}" image="{{ $item->image }}" />
+            @empty
+                <p class="text-center text-gray-500">No items available.</p>
+            @endforelse
         </div>
     </section>
     <section id="about" class="min-h-screen flex items-center justify-center">
@@ -68,4 +68,3 @@
     </a>
     @include('footer')
 @endsection
-

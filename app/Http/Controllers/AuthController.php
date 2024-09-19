@@ -14,10 +14,13 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
         if (Auth::attempt($credentials)) {
-            echo "Login Berhasil";
-            // $request->session()->regenerate();
-            // return redirect()->intended('/');
+            // Regenerate session to prevent session fixation
+            $request->session()->regenerate();
+
+            // Redirect to the intended page or home page
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([

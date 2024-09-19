@@ -1,5 +1,5 @@
 <div class="relative flex flex-col gap-1 p-4 h-72 dark:border-gray-400 border-gray-300 border rounded-lg shadow-md shadow-gray-600 dark:shadow-teal-100">
-    <img src="{{ asset('images/') . $image}}" alt="Product Image" class="w-full object-cover">
+    <img src="{{ asset('images/laptop.jpg') }}" alt="Product Image" class="w-full object-cover">
     <h2 class="text-base dark:text-white text-black">{{ $name }}</h2>
     <h2 class="text-sm dark:text-white text-black font-semibold">Rp {{ $price }}</h2>
     <form class="w-28">
