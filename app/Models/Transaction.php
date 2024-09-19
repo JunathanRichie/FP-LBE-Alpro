@@ -20,4 +20,13 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function calculateTotal() {
+        $total = 0;
+        foreach ($this->itemTransactions as $itemTransaction) {
+            $total += $itemTransaction->harga_kumulatif;
+        }
+        $this->total_harga = $total;
+        $this->save();
+    }
 }

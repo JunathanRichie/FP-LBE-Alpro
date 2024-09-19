@@ -15,7 +15,7 @@ npm run dev
 + jan lupa 
 + `composer install`, klo gk bekerja => `composer update`
 + `php artisan key:generate`
-+ `php artisan session:table`
+<!-- + `php artisan session:table` -->
 + `php artisan make:migrate`
 + `php artisan migrate:fresh --seed`
 
