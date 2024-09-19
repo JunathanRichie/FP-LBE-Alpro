@@ -11,12 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('item_transactions');
-        Schema::dropIfExists('transactions');
-        Schema::dropIfExists('promo_items');
-        Schema::dropIfExists('items');
-        Schema::dropIfExists('users');
-        
         Schema::create('users', function (Blueprint $table) {
             $table->integer('id_user')->primary();
             $table->string('email', 75)->unique();
@@ -39,9 +33,6 @@ return new class extends Migration
             $table->integer('mn_beli');
             $table->integer('diskon')->nullable();
             $table->integer('gratis_item')->nullable();
-
-            $table->char('id_item', 15);
-            $table->foreign('id_item')->references('id_item')->on('items');
         });
 
         Schema::create('transactions', function (Blueprint $table) {
@@ -56,16 +47,6 @@ return new class extends Migration
             $table->char('id_item', 14);
             $table->foreign('id_item')->references('id_item')->on('items');
         });
-
-        Schema::create('items_transactions', function (Blueprint $table) {
-            $table->integer('id_transaction');
-            $table->foreign('id_transaction')->references('id_transaction')->on('transactions');
-            
-            $table->char('id_item', 15);
-            $table->foreign('id_item')->references('id_item')->on('items');
-
-            $table->integer('kuantitas');
-        });
     }
 
     /**
@@ -77,6 +58,6 @@ return new class extends Migration
         Schema::dropIfExists('promo_items');
         Schema::dropIfExists('items');
         Schema::dropIfExists('users');
-        // schema::dropIfExists('items_transactions');
+        Schema::dropIfExists('keranjang');
     }
 };
