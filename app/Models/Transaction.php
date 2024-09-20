@@ -10,7 +10,7 @@ use App\Models\User;
 class Transaction extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'id_transaction';
     protected $fillable = ['total_harga', 'tgl_transaksi', 'id_user','paid'];
 
     public function itemsTransactions()
