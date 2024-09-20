@@ -725,6 +725,22 @@ video {
   height: 100%;
 }
 
+.h-36 {
+  height: 9rem;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-80 {
+  height: 20rem;
+}
+
+.max-h-32 {
+  max-height: 8rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -769,12 +785,24 @@ video {
   width: 100%;
 }
 
+.w-36 {
+  width: 9rem;
+}
+
+.w-auto {
+  width: auto;
+}
+
 .min-w-full {
   min-width: 100%;
 }
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-32 {
+  max-width: 8rem;
 }
 
 .grid-cols-4 {

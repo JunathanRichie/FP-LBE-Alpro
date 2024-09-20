@@ -1,7 +1,9 @@
 @props(['gambar', 'name', 'price', 'id_item', 'userId'])
 
-<div class="relative flex flex-col gap-1 p-4 h-72 dark:border-gray-400 border-gray-300 border rounded-lg shadow-md shadow-gray-600 dark:shadow-teal-100">
-    <img src="{{ 'images/' . $gambar }}" alt="Product Image" class="w-full object-cover overflow-hidden">
+<div class="relative flex flex-col gap-1 p-4 h-80 dark:border-gray-400 border-gray-300 border rounded-lg shadow-md shadow-gray-600 dark:shadow-teal-100">
+    <div class="flex items-center justify-center w-36 h-36">
+        <img src="{{ 'images/' . $gambar }}" alt="Product Image" class="w-auto h-auto max-h-32 max-w-32 object-cover overflow-hidden">
+    </div>
     <h2 class="text-base dark:text-white text-black">{{ $name }}</h2>
     <h2 class="text-sm dark:text-white text-black font-semibold">Rp {{ $price }}</h2>
     <form class="w-28">

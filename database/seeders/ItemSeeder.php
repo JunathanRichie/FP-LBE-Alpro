@@ -40,7 +40,7 @@ class ItemSeeder extends Seeder
                 'nama_item' => 'Teh Sosro',
                 'stock_item' => 100,
                 'harga_item' => 4000,
-                'image' => 'teh-sosro.jpg'
+                'image' => 'teh-sosro.png'
             ],
             [
                 'id_item' => '8 123456 789016',
