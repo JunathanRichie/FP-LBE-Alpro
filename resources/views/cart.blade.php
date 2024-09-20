@@ -18,25 +18,8 @@
                     <th class="py-3 px-6 text-center">Action</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-600 text-sm font-light">
-                <!-- Example Item -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">
-                        <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full object-cover mr-4" src="path_to_image" alt="Product Image">
-                            <span class="font-medium">Product Name</span>
-                        </div>
-                    </td>
-                    <td class="py-3 px-6 text-center">
-                        <input type="number" value="1" class="border rounded w-12 text-center">
-                    </td>
-                    <td class="py-3 px-6 text-center">Rp. 100,000</td>
-                    <td class="py-3 px-6 text-center">Rp. 100,000</td>
-                    <td class="py-3 px-6 text-center">
-                        <button class="text-red-600 hover:text-red-800">Remove</button>
-                    </td>
-                </tr>
-                <!-- Repeat for each item -->
+            <tbody id="cart-items" class="text-gray-600 text-sm font-light">
+                <!-- Cart items will be injected here by JS -->
             </tbody>
         </table>
     </div>
@@ -46,7 +29,7 @@
         <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
         <div class="flex justify-between mb-3">
             <span class="text-gray-600">Subtotal</span>
-            <span class="font-semibold">Rp. 300,000</span>
+            <span id="subtotal" class="font-semibold">Rp. 0</span>
         </div>
         <div class="flex justify-between mb-3">
             <span class="text-gray-600">Shipping</span>
@@ -54,11 +37,60 @@
         </div>
         <div class="flex justify-between mb-4">
             <span class="text-gray-600">Total</span>
-            <span class="font-semibold text-lg">Rp. 320,000</span>
+            <span id="total" class="font-semibold text-lg">Rp. 0</span>
         </div>
         <button class="w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600">
             Proceed to Checkout
         </button>
     </div>
 </div>
+
+<script>
+    const userId = {{ $userId ?? 'null' }}; // Jika userId tidak ada, nilainya menjadi 'null'
+
+    if (!userId) {
+        window.location.href = '/login'; // Redirect ke halaman login jika belum login
+    }
+    // Function to fetch and display cart data
+    async function fetchCartData() {
+        const response = await fetch(`/cart/${userId}`);
+        const data = await response.json();
+
+        const cartItems = data.data;
+        const cartItemsContainer = document.getElementById('cart-items');
+        cartItemsContainer.innerHTML = ''; // Clear any previous data
+
+        let subtotal = 0;
+
+        cartItems.forEach(item => {
+            const totalItemPrice = item.harga_item * item.kuantitas;
+            subtotal += totalItemPrice;
+
+            cartItemsContainer.innerHTML += `
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="py-3 px-6 text-left">
+                        <div class="flex items-center">
+                            <img class="w-12 h-12 rounded-full object-cover mr-4" src="images/${item.image}" alt="Product Image">
+                            <span class="font-medium">${item.nama_item}</span>
+                        </div>
+                    </td>
+                    <td class="py-3 px-6 text-center">
+                        <input type="number" value="${item.kuantitas}" class="border rounded w-12 text-center">
+                    </td>
+                    <td class="py-3 px-6 text-center">Rp. ${item.harga_item.toLocaleString()}</td>
+                    <td class="py-3 px-6 text-center">Rp. ${totalItemPrice.toLocaleString()}</td>
+                    <td class="py-3 px-6 text-center">
+                        <button class="text-red-600 hover:text-red-800">Remove</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        document.getElementById('subtotal').textContent = `Rp. ${subtotal.toLocaleString()}`;
+        document.getElementById('total').textContent = `Rp. ${(subtotal + 20000).toLocaleString()}`; // Assuming shipping is Rp. 20,000
+    }
+
+    // Fetch cart data when the page loads
+    window.onload = fetchCartData;
+</script>
 @endsection

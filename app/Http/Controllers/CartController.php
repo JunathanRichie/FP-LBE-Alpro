@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Models\ItemsTransaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -79,12 +80,17 @@ class CartController extends Controller
             if (!$transactions) {
                 return response()->json(['message' => 'No unpaid transactions found for this user.']);
             }
-            $itemsTransactions = ItemsTransaction::where('id_transaction', $transactions->id_transaction)->get();
+            $itemsTransactions = ItemsTransaction::join('items', 'items.id_item', '=', 'items_transactions.id_item')
+            ->where('items_transactions.id_transaction', $transactions->id_transaction)
+            ->select('items.nama_item','items.image','items.harga_item', 'items_transactions.id_item', 'items_transactions.kuantitas', 'items_transactions.created_at', 'items_transactions.updated_at')
+            ->get();
             if ($itemsTransactions->isEmpty()) {
                 return response()->json(['message' => 'No transactions found for this ID.']);
             }
-    
-            return response()->json(['data' => $itemsTransactions], 200);
+            $totalHarga = $itemsTransactions->sum(function($itemTransaction) {
+                return $itemTransaction->harga_item * $itemTransaction->kuantitas;
+            });
+            return response()->json(['data' => $itemsTransactions,'total_harga' => $totalHarga], 200);
             
         } catch (\Exception $e) {
             return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
@@ -142,6 +148,7 @@ class CartController extends Controller
     
     public function index()
     {
-        return view('cart');
+        $userId = Auth::id();
+        return view('cart', ['userId' => $userId]);
     }
 }
