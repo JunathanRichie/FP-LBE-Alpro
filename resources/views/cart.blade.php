@@ -3,8 +3,9 @@
 @section('title', 'Your Cart')
 
 @section('content')
+<div class="pt-48"></div>
 <div class="container mx-auto py-12">
-    <h1 class="text-4xl font-bold text-center mb-8">Your Shopping Cart</h1>
+    <h1 class="text-4xl font-bold text-center mb-8 text-black dark:text-white">Your Shopping Cart</h1>
     
     <!-- Cart Table -->
     <div class="w-full lg:w-2/3 mx-auto bg-white shadow-md rounded-lg overflow-hidden">
