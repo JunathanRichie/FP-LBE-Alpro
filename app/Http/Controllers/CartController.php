@@ -79,7 +79,7 @@ class CartController extends Controller
             if (!$transactions) {
                 return response()->json(['message' => 'No unpaid transactions found for this user.']);
             }
-            $itemsTransactions = ItemsTransaction::where('id_transaction', $transactions->id_transaction)->with(['item', 'transaction'])->get();
+            $itemsTransactions = ItemsTransaction::where('id_transaction', $transactions->id_transaction)->get();
             if ($itemsTransactions->isEmpty()) {
                 return response()->json(['message' => 'No transactions found for this ID.']);
             }
