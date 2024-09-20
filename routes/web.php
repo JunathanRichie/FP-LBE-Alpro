@@ -27,5 +27,11 @@ Route::get('/all-items', [All_ItemsController::class, 'index'])->name('all-items
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
 Route::delete('/transactions/{transaction}/items/{item}', [TransactionController::class, 'deleteItemTransaction']);
 
-
 Route::put('/transactions/{transaction}/items/{item}', [TransactionController::class, 'updateItem']);
+Route::get('/get-csrf-token', function () {
+    return response()->json([
+        'csrf_token' => csrf_token(),
+    ]);
+});
+
+Route::post('/cart/add', [CartController::class, 'addToCart']);

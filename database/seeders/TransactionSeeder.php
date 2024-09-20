@@ -20,7 +20,6 @@ class TransactionSeeder extends Seeder
                 'tgl_transaksi' => '2024-09-18 02:26:23',
                 'paid' => true,
                 'id_user' => 1,
-                'id_item' => '8 123456 789012'
             ],
             [
                 'id_transaction' => 2,
@@ -28,7 +27,6 @@ class TransactionSeeder extends Seeder
                 'tgl_transaksi' => '2024-09-18 02:26:23',
                 'paid' => true,
                 'id_user' => 2,
-                'id_item' => '8 123456 789022'
             ],
             [
                 'id_transaction' => 3,
@@ -36,7 +34,6 @@ class TransactionSeeder extends Seeder
                 'tgl_transaksi' => '2024-09-18 02:26:23',
                 'paid' => true,
                 'id_user' => 3,
-                'id_item' => '8 123456 789021'
             ]
         ]);
     }

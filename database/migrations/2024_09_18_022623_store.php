@@ -18,11 +18,12 @@ return new class extends Migration
         Schema::dropIfExists('users');
         
         Schema::create('users', function (Blueprint $table) {
-            $table->integer('id_user')->primary();
+            $table->integer('id_user')->primary()->autoincrement();
             $table->string('email', 75)->unique();
             $table->string('nama_user', 50);
             $table->string('password', 255);
             $table->string('no_telp', 14)->nullable();
+            $table->timestamps();
         });
 
         Schema::create('items', function (Blueprint $table) {
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->integer('stock_item');
             $table->float('harga_item', 8, 2);
             $table->string('image', 100);
+            $table->timestamps();
         });
 
         Schema::create('promo_items', function (Blueprint $table) {
@@ -39,32 +41,28 @@ return new class extends Migration
             $table->integer('mn_beli');
             $table->integer('diskon')->nullable();
             $table->integer('gratis_item')->nullable();
-
             $table->char('id_item', 16);
             $table->foreign('id_item')->references('id_item')->on('items');
+            $table->timestamps();
         });
 
         Schema::create('transactions', function (Blueprint $table) {
-            $table->integer('id_transaction')->primary();
+            $table->integer('id_transaction')->primary()->autoIncrement();
             $table->float('total_harga', 8, 2);
             $table->dateTime('tgl_transaksi');
             $table->boolean('paid');
-
             $table->integer('id_user');
             $table->foreign('id_user')->references('id_user')->on('users');
-            
-            $table->char('id_item', 16);
-            $table->foreign('id_item')->references('id_item')->on('items');
+            $table->timestamps();
         });
 
         Schema::create('items_transactions', function (Blueprint $table) {
             $table->integer('id_transaction');
             $table->foreign('id_transaction')->references('id_transaction')->on('transactions');
-            
             $table->char('id_item', 16);
             $table->foreign('id_item')->references('id_item')->on('items');
-
             $table->integer('kuantitas');
+            $table->timestamps();
         });
     }
 
@@ -73,7 +71,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        schema::dropIfExists('items_transactions');
+        Schema::dropIfExists('items_transactions');
         Schema::dropIfExists('transactions');
         Schema::dropIfExists('promo_items');
         Schema::dropIfExists('items');
