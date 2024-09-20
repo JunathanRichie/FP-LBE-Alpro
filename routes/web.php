@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     $items = Item::all();
-    return view('welcome', compact('items'));
+    $userId = auth()->user()->id; 
+    return view('all-items', compact('items', 'userId'));
 });
 
 // Untuk API

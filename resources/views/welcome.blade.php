@@ -8,7 +8,7 @@
         <h1 class="text-4xl font-bold text-black dark:text-white text-center mb-8">New Arrivals</h1>
         <div class="grid grid-cols-5 w-3/4 mx-auto gap-10">
             @forelse ($items as $item)
-                <x-card name="{{ $item->nama_item }}" price="{{ $item->harga_item }}" gambar="{{ $item->image }}" />
+                <x-card :gambar="$item['image']" name="{{ $item['nama_item'] }}" price="{{ $item['harga_item'] }}" id_item="{{ $item['id_item'] }}" :userId="$userId"/>
             @empty
                 <p class="text-center text-gray-500">No items available.</p>
             @endforelse
