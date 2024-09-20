@@ -46,19 +46,18 @@
 </div>
 
 <script>
-    const userId = {{ $userId ?? 'null' }}; // Jika userId tidak ada, nilainya menjadi 'null'
+    const userId = {{ $userId ?? 'null' }}; 
 
     if (!userId) {
-        window.location.href = '/login'; // Redirect ke halaman login jika belum login
+        window.location.href = '/login';
     }
-    // Function to fetch and display cart data
     async function fetchCartData() {
         const response = await fetch(`/cart/${userId}`);
         const data = await response.json();
 
         const cartItems = data.data;
         const cartItemsContainer = document.getElementById('cart-items');
-        cartItemsContainer.innerHTML = ''; // Clear any previous data
+        cartItemsContainer.innerHTML = ''; 
 
         let subtotal = 0;
 
@@ -75,22 +74,48 @@
                         </div>
                     </td>
                     <td class="py-3 px-6 text-center">
-                        <input type="number" value="${item.kuantitas}" class="border rounded w-12 text-center">
+                        <input type="number" value="${item.kuantitas}" class="border rounded w-12 text-center" id="quantity-${item.id_item}">
                     </td>
                     <td class="py-3 px-6 text-center">Rp. ${item.harga_item.toLocaleString()}</td>
                     <td class="py-3 px-6 text-center">Rp. ${totalItemPrice.toLocaleString()}</td>
                     <td class="py-3 px-6 text-center">
-                        <button class="text-red-600 hover:text-red-800">Remove</button>
+                        <button class="text-red-600 hover:text-red-800" onclick="removeFromCart(${userId}, '${item.id_item}')">Remove</button>
                     </td>
                 </tr>
             `;
         });
 
         document.getElementById('subtotal').textContent = `Rp. ${subtotal.toLocaleString()}`;
-        document.getElementById('total').textContent = `Rp. ${(subtotal + 20000).toLocaleString()}`; // Assuming shipping is Rp. 20,000
+        document.getElementById('total').textContent = `Rp. ${(subtotal + 20000).toLocaleString()}`; 
     }
 
-    // Fetch cart data when the page loads
+    async function removeFromCart(userId, id_item) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        const payload = {
+            id_user: userId,
+            id_item: id_item,
+        };
+
+        const response = await fetch('http://localhost:8000/cart/remove', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify(payload),
+        });
+
+        // Periksa status respons
+        if (response.ok) { // Jika status 200-299
+            fetchCartData(); // Refresh the cart data after removal
+        } else {
+            const data = await response.json(); // Ambil data JSON jika ada error
+            Swal.fire('Error', data.message || 'Something went wrong!', 'error');
+        }
+    }
+
     window.onload = fetchCartData;
 </script>
 @endsection

@@ -10,8 +10,11 @@ class All_ItemsController extends Controller
     public function index()
     {
         $items = Item::all();
-        $userId = auth()->user()->id; 
-        // return response()->json($items['image']);
-        return view('all-items', compact('items', 'userId'));
+        $items = $items->map(function ($item) use ($userId) {
+            $item->userId = $userId; // Tambahkan atribut userId
+            return $item;
+        });
+    
+        return view('all-items', compact('items'));
     }
 }
