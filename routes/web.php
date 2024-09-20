@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     $items = Item::all();
     $userId = auth()->user()->id; 
-    return view('all-items', compact('items', 'userId'));
-});
+    return view('welcome', compact('items', 'userId'));
+})->middleware('auth');
 
 // Untuk API
 Route::get('/login', function () {
@@ -23,8 +23,8 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect()->route('login.form');
 })->name('logout');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/all-items', [All_ItemsController::class, 'index'])->name('all-items.index');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index')->middleware('auth');
+Route::get('/all-items', [All_ItemsController::class, 'index'])->name('all-items.index')->middleware('auth');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
 Route::delete('/transactions/{transaction}/items/{item}', [TransactionController::class, 'deleteItemTransaction']);
 
