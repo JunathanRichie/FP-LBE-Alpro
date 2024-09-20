@@ -91,6 +91,55 @@ class CartController extends Controller
         }
     }
 
+    public function removeCart(Request $request)
+    {
+        try {
+            // Validasi input
+            $validated = $request->validate([
+                'id_user' => 'required|integer',
+                'id_item' => 'required|string'
+            ]);
+    
+            // Cari transaksi yang unpaid berdasarkan id_user
+            $transaction = Transaction::where('id_user', $validated['id_user'])
+                ->where('paid', 0)
+                ->first();
+    
+            // Jika transaksi tidak ditemukan
+            if (!$transaction) {
+                return response()->json([
+                    'error' => 'Unpaid transaction not found for this user.'
+                ], 404);
+            }
+    
+            // Cari item di tabel item_transaction berdasarkan transaction_id dan id_item
+            $entry = ItemsTransaction::where('id_transaction', $transaction->id_transaction)
+                ->where('id_item', $validated['id_item'])
+                ->first();
+    
+            // Jika item tidak ditemukan dalam transaksi tersebut
+            if (!$entry) {
+                return response()->json([
+                    'error' => 'Item not found in this transaction.'
+                ], 404);
+            }
+    
+            // Hapus item dari item_transaction
+            $entry->delete();
+    
+            return response()->json([
+                'message' => 'Item successfully removed from the transaction.'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            // Tangani exception dan kirimkan error message
+            return response()->json([
+                'error' => 'An error occurred while deleting the item from the transaction.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
     public function index()
     {
         return view('cart');
